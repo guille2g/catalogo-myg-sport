@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Catálogo MYG SPORT</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <header>
+    <div class="brand-wrap">
+      <div class="brand-title" id="brandTitle">MYG SPORT</div>
+      <span class="mode-badge" id="modeBadge">Minorista</span>
+    </div>
+    <div class="header-actions" id="headerActions">
+      <button class="btn btn-ghost" id="btnModeMin">Vista Minorista</button>
+      <button class="btn btn-ghost" id="btnModeMay">Vista Mayorista</button>
+      <button class="btn btn-light" id="btnToggleAdmin">Admin</button>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="wholesale-banner" id="wholesaleBanner"></div>
+
+    <!-- PANEL ADMINISTRADOR -->
+    <section id="adminPanel">
+      <div class="admin-header">
+        <div>
+          <h3 id="formTitle">Agregar Nuevo Producto</h3>
+          <p style="font-size:0.82rem;color:var(--muted);">Los cambios se guardan directamente en tu base de datos Firebase en la nube.</p>
+        </div>
+        <button class="btn btn-outline btn-sm" id="btnCloseAdmin">Cerrar Admin</button>
+      </div>
+
+      <input type="hidden" id="editProductId" value="" />
+
+      <div class="form-grid">
+        <div class="field-group">
+          <label>Nombre del producto *</label>
+          <input type="text" id="pName" placeholder="Ej: Mancuerna Hexagonal 5kg" />
+        </div>
+        <div class="field-group">
+          <label>Categoría</label>
+          <input type="text" id="pCategory" placeholder="Ej: Pesas, Boxeo, Funcional" />
+        </div>
+        <div class="field-group">
+          <label>Precio Minorista ($) *</label>
+          <input type="number" id="pPriceMin" placeholder="18000" />
+        </div>
+        <div class="field-group">
+          <label>Precio Mayorista ($)</label>
+          <input type="number" id="pPriceMay" placeholder="13500" />
+        </div>
+        <div class="field-group">
+          <label>Disponibilidad</label>
+          <select id="pStock">
+            <option value="true">Con stock (Disponible)</option>
+            <option value="false">Sin stock (Pausado)</option>
+          </select>
+        </div>
+        <div class="field-group">
+          <label>Fotos (podés elegir hasta 4 por producto)</label>
+          <input type="file" id="pFiles" accept="image/*" multiple />
+        </div>
+      </div>
+
+      <div class="field-group" style="margin-bottom:10px;">
+        <label>Detalle o colores disponibles (opcional)</label>
+        <input type="text" id="pDesc" placeholder="Ej: Colores negro, rojo y azul. Precio por unidad." />
+      </div>
+
+      <div class="preview-strip" id="imagePreviewStrip"></div>
+
+      <div style="display:flex;gap:8px;flex-wrap:wrap;">
+        <button class="btn btn-primary" id="saveBtn">Guardar Producto</button>
+        <button class="btn btn-outline" id="cancelEditBtn" style="display:none;">Cancelar Edición</button>
+      </div>
+
+      <div class="admin-list" id="adminList"></div>
+    </section>
+
+    <!-- BUSCADOR Y FILTRO -->
+    <div class="filters-bar">
+      <input type="text" id="searchInput" placeholder="Buscar producto..." />
+      <select id="categoryFilter" style="width:auto;min-width:170px;">
+        <option value="">Todas las categorías</option>
+      </select>
+    </div>
+
+    <!-- GRILLA DE PRODUCTOS -->
+    <div class="status-msg" id="loadingMsg">Cargando catálogo desde la nube...</div>
+    <section class="grid" id="catalogGrid"></section>
+  </div>
+
+  <!-- BARRA DE CARRITO -->
+  <div class="cart-bar">
+    <div class="cart-summary" id="cartSummary">Carrito vacío</div>
+    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+      <select id="paymentMethod" style="width:auto;">
+        <option value="Efectivo al retirar">Efectivo al retirar</option>
+        <option value="Transferencia">Transferencia</option>
+      </select>
+      <button class="btn btn-primary" id="sendBtn" disabled>Enviar por WhatsApp</button>
+    </div>
+  </div>
+
+  <!-- MODAL ZOOM DE FOTOS -->
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox-close" id="lbClose">Cerrar ✕</button>
+    <div class="lightbox-img-wrap">
+      <button class="slide-btn prev" id="lbPrev">‹</button>
+      <img id="lbImg" src="" alt="Vista ampliada" />
+      <button class="slide-btn next" id="lbNext">›</button>
+    </div>
+    <div class="lightbox-caption" id="lbCaption"></div>
+  </div>
+
+  <script src="config.js"></script>
+  <script type="module" src="app.js"></script>
+</body>
+</html>
